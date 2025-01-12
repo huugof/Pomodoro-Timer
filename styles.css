@@ -262,6 +262,11 @@ body {
                     0px 2px 4px rgba(0, 0, 0, 0.15);
     }
 
+    /* Ensure primary buttons maintain their background color */
+    .circle-button.primary {
+        background: var(--primary-color);
+    }
+
     /* Break mode specific reset */
     .break-mode .circle-button:hover,
     .break-mode #reset:hover {
@@ -278,10 +283,18 @@ body {
     }
 
     /* Start and Add-time button touch states */
-    #start:active,
-    #start.touch-active,
-    #add-time:active,
-    #add-time.touch-active {
+    body:not(.break-mode) #start:active,
+    body:not(.break-mode) #start.touch-active {
+        background-color: var(--primary-hover);
+        color: var(--white);
+    }
+
+    body:not(.break-mode) #start {
+        background-color: var(--primary-color);
+    }
+
+    body:not(.break-mode) #add-time:active,
+    body:not(.break-mode) #add-time.touch-active {
         background-color: var(--primary-hover);
         color: var(--white);
     }
