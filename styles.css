@@ -1,3 +1,4 @@
+/* CSS Variables */
 :root {
     /* Base colors */
     --white: #FFFFFF;
@@ -10,7 +11,7 @@
     
     /* Work mode */
     --primary-color: var(--blue-600);
-    --primary-hover: var(--blue-700);
+    --primary-hover: var(--blue-900);
     --danger-color: var(--red-600);
     --danger-hover: var(--red-700);
     --background: var(--white);
@@ -21,11 +22,12 @@
     /* Break mode */
     --break-background: var(--blue-900);
     --break-text: rgba(255, 255, 255, 0.8);
-    --break-surface: rgba(255, 255, 255, 0.8);
+    --break-surface: rgba(255, 255, 255, 0.4);
     --break-surface-hover: rgba(255, 255, 255, 1);
     --break-ring-bg: rgba(255, 255, 255, 0.1);
 }
 
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -41,6 +43,7 @@ body {
     justify-content: center;
 }
 
+/* Layout */
 .container {
     padding: 2rem;
     width: 100%;
@@ -48,6 +51,7 @@ body {
     text-align: center;
 }
 
+/* Timer Display */
 .timer-container {
     position: relative;
     margin: 2rem auto;
@@ -93,10 +97,10 @@ body {
     font-size: 3.5rem;
     font-weight: 600;
     color: var(--primary-color);
-    text-align: center;
     margin-top: -0.25rem;
 }
 
+/* Controls Layout */
 .controls {
     margin-top: 2rem;
     display: flex;
@@ -111,6 +115,7 @@ body {
     align-items: center;
 }
 
+/* Button Base Styles */
 .circle-button {
     width: 64px;
     height: 64px;
@@ -121,66 +126,27 @@ body {
     align-items: center;
     justify-content: center;
     background: var(--surface);
+    color: var(--primary-color);
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1), 
                 0px 2px 4px rgba(0, 0, 0, 0.15);
     transition: all 0.2s ease;
-}
-
-.circle-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15), 
-                0px 3px 6px rgba(0, 0, 0, 0.2);
-}
-
-.circle-button:active {
-    transform: translateY(0px);
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .circle-button svg {
     fill: currentColor;
 }
 
+/* Button Variants */
 .circle-button.primary {
     background: var(--primary-color);
-    color: white;
-}
-
-.circle-button.primary:hover {
-    background: var(--primary-hover);
+    color: var(--white);
 }
 
 #reset {
     color: var(--danger-color);
 }
 
-#reset:hover {
-    background: var(--danger-color);
-    color: white;
-}
-
-.pill-button {
-    padding: 0.85rem 1.5rem;
-    border-radius: 9999px;
-    border: none;
-    background: var(--surface);
-    color: var(--text-primary);
-    font-weight: 500;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-    transition: all 0.2s
-}
-
-.circle-button.secondary {
-    background: var(--surface);
-    color: var(--primary-color);
-}
-
-.circle-button.secondary:hover {
-    background: var(--primary-color);
-    color: white;
-}
-
+/* Mode Switch Button */
 .mode-switch {
     position: absolute;
     top: -1rem;
@@ -189,147 +155,10 @@ body {
     height: 40px;
     padding: 8px;
     z-index: 1;
-    background: var(--surface);
-    color: var(--primary-color);
-}
-
-.mode-switch:hover {
-    background: var(--primary-color);
-    color: white;
 }
 
 .mode-switch .break-icon {
     display: none;
-}
-
-.break-mode .mode-switch .focus-icon {
-    display: none;
-}
-
-.break-mode .mode-switch .break-icon {
-    display: block;
-}
-
-.break-mode .mode-switch {
-    color: var(--break-primary);
-}
-
-.break-mode .circle-button.primary {
-    background: var(--break-primary);
-    color: white;
-}
-
-.break-mode .circle-button.primary:hover {
-    background: var(--break-hover);
-}
-
-/* Mode switch button hover states */
-.mode-switch:hover {
-    background: var(--primary-color);
-    color: white;
-}
-
-.break-mode .mode-switch:hover {
-    background: var(--primary-color);
-    color: white;
-}
-
-/* Add these new break mode styles */
-:root:has(.break-mode) body,
-body.break-mode {
-    background-color: var(--break-background);
-}
-
-:root:has(.break-mode) .container,
-body.break-mode .container {
-    background-color: var(--break-background);
-}
-
-:root:has(.break-mode) .time,
-body.break-mode .time {
-    color: rgba(255, 255, 255, 0.8);  /* 70% opacity white */
-}
-
-:root:has(.break-mode) .progress-ring-bg,
-body.break-mode .progress-ring-bg {
-    stroke: rgba(255, 255, 255, 0.1);  /* Keep background ring subtle */
-}
-
-:root:has(.break-mode) .progress-ring-circle,
-body.break-mode .progress-ring-circle {
-    stroke: rgba(255, 255, 255, 0.8);  /* 70% opacity white */
-}
-
-/* Update any button text/icons that are white in break mode */
-.break-mode .circle-button.primary {
-    color: rgba(255, 255, 255, 0.4);  /* 70% opacity white */
-}
-
-/* Update controls for break mode */
-:root:has(.break-mode) .controls svg,
-body.break-mode .controls svg {
-    color: rgba(255, 255, 255, 0.4);  /* 70% opacity white */
-}
-
-:root:has(.break-mode) .circle-button,
-body.break-mode .circle-button {
-    color: rgba(255, 255, 255, 0.8);
-    background-color: rgba(255, 255, 255, 0.4);  /* Updated to 0.8 opacity */
-}
-
-:root:has(.break-mode) .circle-button:hover,
-body.break-mode .circle-button:hover {
-    color: rgba(255, 255, 255, 0.9);
-    background-color: rgba(255, 255, 255, 1);  /* Slightly more opaque on hover */
-}
-
-:root:has(.break-mode) .circle-button.primary,
-body.break-mode .circle-button.primary {
-    background-color: rgba(255, 255, 255, 0.4);  /* Updated to 0.8 opacity */
-}
-
-:root:has(.break-mode) .circle-button svg,
-body.break-mode .circle-button svg {
-    color: var(--break-background);  /* Make icons contrast with the button background */
-}
-
-:root:has(.break-mode) .circle-button.primary:hover,
-body.break-mode .circle-button.primary:hover {
-    background-color: rgba(255, 255, 255, 1);  /* 100% white on hover */
-    color: var(--break-background);  /* Ensure icon has good contrast */
-}
-
-/* Keep the regular hover state for non-primary buttons */
-:root:has(.break-mode) .circle-button:not(.primary):hover,
-body.break-mode .circle-button:not(.primary):hover {
-    background-color: rgba(255, 255, 255, 1);
-    color: var(--break-background);
-}
-
-/* Reset button specific styles in break mode
-:root:has(.break-mode) #reset,
-body.break-mode #reset {
-    background-color: transparent;  /* Remove background */
-/* } */
-
-/* :root:has(.break-mode) #reset:hover,
-body.break-mode #reset:hover {
-    background-color: rgba(255, 255, 255, 1);  /* Solid white on hover */
-    color: var(--break-background);
-/* } */ */ */
-
-/* Keep primary button styles */
-:root:has(.break-mode) .circle-button.primary:hover,
-body.break-mode .circle-button.primary:hover {
-    background-color: rgba(255, 255, 255, 1);
-    color: var(--break-background);
-}
-
-/* Keep add-time button styles */
-:root:has(.break-mode) #add-time:hover,
-body.break-mode #add-time:hover {
-    background-color: rgba(255, 255, 255, 1);
-    color: var(--break-background);
 }
 
 /* Break Mode Styles */
@@ -338,13 +167,10 @@ body.break-mode #add-time:hover {
 }
 
 .break-mode .container {
-    background-color: var(--break-background);
+    background-color: transparent;
 }
 
-.break-mode .time,
-.break-mode .progress-ring-circle,
-.break-mode .circle-button.primary,
-.break-mode .controls svg {
+.break-mode .time {
     color: var(--break-text);
 }
 
@@ -356,35 +182,12 @@ body.break-mode #add-time:hover {
     stroke: var(--break-text);
 }
 
-/* Consolidated button styles for break mode */
 .break-mode .circle-button {
     background-color: var(--break-surface);
     color: var(--break-background);
-}
-
-.break-mode .circle-button:hover {
-    background-color: var(--break-surface-hover);
-    color: var(--break-background);
-}
-
-.break-mode .circle-button svg {
-    color: var(--break-background);
-}
-
-/* Reset button specific styles */
-/* .break-mode #reset {
-    background-color: transparent;
-    color: var(--break-text);
-} */
-
-/* .break-mode #reset:hover {
-    background-color: var(--break-surface-hover);
-    color: var(--break-background);
-} */
-
-/* Mode switch icon visibility */
-.mode-switch .break-icon {
-    display: none;
+    /* Standardized shadow for break mode */
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25), 
+                0px 2px 4px rgba(0, 0, 0, 0.25);
 }
 
 .break-mode .mode-switch .focus-icon {
@@ -395,76 +198,169 @@ body.break-mode #add-time:hover {
     display: block;
 }
 
-/* Break mode control buttons */
-.break-mode .circle-button {
-    background-color: var(--break-surface);
-    color: var(--break-background);
+/* Desktop Hover States */
+@media (hover: hover) {
+    .circle-button:hover {
+        /* transform: translateY(-1px); */
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15), 
+                    0px 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .circle-button.primary:hover {
+        background: var(--primary-hover);
+    }
+
+    #reset:hover {
+        background: var(--danger-color);
+        color: var(--white);
+    }
+
+    .break-mode .circle-button:hover {
+        background-color: var(--break-surface-hover);
+        /* Standardized hover shadow for break mode */
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25), 
+                    0px 3px 6px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Preserve start button background in break mode */
+    .break-mode #start {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .break-mode #start:hover {
+        background-color: var(--break-surface-hover);
+    }
+
+    /* Add new hover state for add-time button in work mode */
+    body:not(.break-mode) #add-time:hover {
+        background: var(--primary-color);
+        color: var(--white);
+    }
+
+    /* Ensure break mode maintains white hover */
+    .break-mode #add-time:hover {
+        background-color: var(--break-surface-hover);
+    }
 }
 
-.break-mode .circle-button:hover {
-    background-color: var(--break-surface-hover);
-    color: var(--break-background);
+/* Mobile/Touch Device Styles */
+@media (hover: none) and (pointer: coarse) {
+    .circle-button {
+        -webkit-tap-highlight-color: transparent;
+        /* Ensure base shadow is always present */
+        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1), 
+                    0px 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Reset any hover states */
+    .circle-button:hover,
+    .circle-button.primary:hover,
+    #reset:hover {
+        transform: none;
+        background: initial;
+        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1), 
+                    0px 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Break mode specific reset */
+    .break-mode .circle-button:hover,
+    .break-mode #reset:hover {
+        background-color: var(--break-surface);
+    }
+
+    /* Touch feedback */
+    .circle-button:active,
+    .circle-button.touch-active {
+        transform: translateY(-1px);
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15), 
+                    0px 3px 6px rgba(0, 0, 0, 0.2);
+        transition: all 0.05s ease;  /* Faster transition */
+    }
+
+    /* Start and Add-time button touch states */
+    #start:active,
+    #start.touch-active,
+    #add-time:active,
+    #add-time.touch-active {
+        background-color: var(--primary-hover);
+        color: var(--white);
+    }
+
+    /* Toggle-mode button touch states - work mode only */
+    body:not(.break-mode) #toggle-mode:active,
+    body:not(.break-mode) #toggle-mode.touch-active {
+        background-color: var(--primary-hover);
+        color: var(--white);
+    }
+
+    /* Reset button touch states */
+    #reset:active,
+    #reset.touch-active {
+        background-color: var(--danger-color);
+        color: var(--white);
+    }
+
+    /* Break mode touch states */
+    .break-mode .circle-button:active,
+    .break-mode .circle-button.touch-active {
+        background-color: var(--break-surface-hover);
+    }
+
+    /* Break mode reset button touch states */
+    .break-mode #reset:active,
+    .break-mode #reset.touch-active {
+        background-color: var(--danger-color);
+        color: var(--white);
+    }
+
+    /* Break mode start and add-time button touch states */
+    .break-mode #start:active,
+    .break-mode #start.touch-active,
+    .break-mode #add-time:active,
+    .break-mode #add-time.touch-active {
+        background-color: var(--primary-hover);
+        color: var(--white);
+    }
+
+    /* Break mode toggle-mode button touch states */
+    .break-mode #toggle-mode:active,
+    .break-mode #toggle-mode.touch-active {
+        background-color: var(--break-surface-hover);
+        color: var(--break-background);
+    }
+
+    /* Break Mode Styles */
+    .break-mode #start {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .break-mode .circle-button {
+        /* Standardized base shadow for break mode on mobile */
+        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25), 
+                    0px 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .break-mode .circle-button:active,
+    .break-mode .circle-button.touch-active {
+        /* Standardized active shadow for break mode on mobile */
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25), 
+                    0px 3px 6px rgba(0, 0, 0, 0.25);
+    }
 }
 
-/* Reset button specific styles in break mode */
-/* .break-mode #reset:hover { */
-    /* background-color: var(--danger-hover); */
-    /* color: var(--white); */
-/* } */
-
-/* Primary and secondary button hover states in break mode */
-.break-mode .circle-button.primary:hover,
-.break-mode .circle-button.secondary:hover {
-    background-color: var(--break-surface-hover);
-    color: var(--break-background);
-}
-
-/* Ensure icons maintain proper contrast */
-.break-mode .circle-button svg {
-    color: var(--break-background);
-}
-
-.break-mode #reset:hover svg {
-    color: var(--white);
-}
-
-/* Control buttons */
-/* .circle-button {
-    background-color: rgba(255, 255, 255, 0.8); /* 70% white */
-    color: var(--break-background);
-/* } */ */
-
-/* .circle-button:hover {
-    background-color: rgba(255, 255, 255, 1); /* 100% white on hover */
-    color: var(--break-background);
-/* } */ */
-
-/* Reset button specific styles */
-#reset {
-    background-color: rgba(255, 255, 255, 0.8); /* 70% white */
-}
-
-#reset:hover {
-    background-color: var(--danger-hover); /* Red on hover */
-    color: var(--white);
-}
-
-/* Mobile styles */
+/* Mobile Layout */
 @media screen and (max-width: 768px) {
     .container {
         min-height: 100vh;
-        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
         padding: 0 2rem;
     }
 
     .timer-container {
         margin: 0 auto;
-        position: relative;
-        transform: translateY(-10vh);
+        transform: translateY(-20vh);
     }
 
     .controls {
@@ -475,29 +371,5 @@ body.break-mode #add-time:hover {
         width: 100%;
         padding: 0 2rem;
         margin: 0;
-        background: transparent;
-    }
-}
-
-/* Move all hover effects inside this media query */
-@media (hover: hover) {
-    .circle-button:hover {
-        transform: translateY(-1px);
-        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15), 
-                    0px 3px 6px rgba(0, 0, 0, 0.2);
-    }
-
-    .circle-button.primary:hover {
-        background: var(--primary-hover);
-    }
-
-    #reset:hover {
-        background-color: var(--danger-hover);
-        color: var(--white);
-    }
-
-    .break-mode .circle-button:hover {
-        background-color: var(--break-surface-hover);
-        color: var(--break-background);
     }
 }

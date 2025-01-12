@@ -64,7 +64,7 @@ function toggleTimer() {
                 isWorkTime = !isWorkTime;
                 timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
                 modeText.textContent = isWorkTime ? 'Focus Time' : 'Break Time';
-                document.querySelector('.container').classList.toggle('break-mode');
+                document.body.classList.toggle('break-mode');
                 updateDisplay();
                 
                 if (Notification.permission === 'granted') {
@@ -101,7 +101,7 @@ function toggleMode() {
     timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
     currentTotalTime = timeLeft;
     
-    document.querySelector('.container').classList.toggle('break-mode');
+    document.body.classList.toggle('break-mode');
     
     updateDisplay();
     setProgress(100);
@@ -121,10 +121,33 @@ function addFiveMinutes() {
     updateDisplay();
 }
 
-startButton.addEventListener('click', toggleTimer);
-resetButton.addEventListener('click', reset);
-toggleModeButton.addEventListener('click', toggleMode);
-addTimeButton.addEventListener('click', addFiveMinutes);
+function handleTouchStart(e) {
+    const button = e.currentTarget;
+    button.classList.add('touch-active');
+}
+
+function handleTouchEnd(e) {
+    const button = e.currentTarget;
+    button.classList.remove('touch-active');
+}
+
+// Map buttons to their click handlers
+const buttonHandlers = {
+    'start': toggleTimer,
+    'reset': reset,
+    'toggle-mode': toggleMode,
+    'add-time': addFiveMinutes
+};
+
+[startButton, resetButton, toggleModeButton, addTimeButton].forEach(button => {
+    const originalHandler = buttonHandlers[button.id];
+    
+    button.addEventListener('click', originalHandler);
+    button.addEventListener('touchstart', handleTouchStart);
+    button.addEventListener('touchend', handleTouchEnd);
+    button.addEventListener('touchcancel', handleTouchEnd);
+    // Remove mouseleave listener as it's not needed for touch devices
+});
 
 if (Notification.permission === 'default') {
     Notification.requestPermission();
