@@ -96,9 +96,19 @@ function toggleMode() {
     isWorkTime = !isWorkTime;
     timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
     currentTotalTime = timeLeft;
+    
     document.querySelector('.container').classList.toggle('break-mode');
-    modeText.textContent = isWorkTime ? 'Focus Time' : 'Break Time';
+    
     updateDisplay();
+    setProgress(100);
+    
+    if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
+        startButton.innerHTML = `<svg viewBox="0 0 24 24" width="24" height="24">
+            <path d="M8 5v14l11-7z"/>
+        </svg>`;
+    }
 }
 
 function addFiveMinutes() {
