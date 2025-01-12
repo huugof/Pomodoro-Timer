@@ -64,7 +64,7 @@ function toggleTimer() {
                 isWorkTime = !isWorkTime;
                 timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
                 modeText.textContent = isWorkTime ? 'Focus Time' : 'Break Time';
-                toggleModeButton.textContent = `Switch to ${isWorkTime ? 'Break' : 'Focus'}`;
+                document.querySelector('.container').classList.toggle('break-mode');
                 updateDisplay();
                 
                 if (Notification.permission === 'granted') {
@@ -88,7 +88,7 @@ function reset() {
         <path d="M8 5v14l11-7z"/>
     </svg>`;
     modeText.textContent = 'Focus Time';
-    toggleModeButton.textContent = 'Switch to Break';
+    document.querySelector('.container').classList.remove('break-mode');
     updateDisplay();
 }
 
@@ -96,7 +96,7 @@ function toggleMode() {
     isWorkTime = !isWorkTime;
     timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
     currentTotalTime = timeLeft;
-    toggleModeButton.textContent = `Switch to ${isWorkTime ? 'Break' : 'Focus'}`;
+    document.querySelector('.container').classList.toggle('break-mode');
     modeText.textContent = isWorkTime ? 'Focus Time' : 'Break Time';
     updateDisplay();
 }
