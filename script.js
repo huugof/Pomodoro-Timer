@@ -81,15 +81,19 @@ function toggleTimer() {
 function reset() {
     clearInterval(timerId);
     timerId = null;
-    isWorkTime = true;
-    timeLeft = WORK_TIME;
-    currentTotalTime = WORK_TIME;
+    timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
+    currentTotalTime = timeLeft;
+    
     startButton.innerHTML = `<svg viewBox="0 0 24 24" width="24" height="24">
         <path d="M8 5v14l11-7z"/>
     </svg>`;
-    modeText.textContent = 'Focus Time';
-    document.querySelector('.container').classList.remove('break-mode');
+    
+    if (modeText) {
+        modeText.textContent = isWorkTime ? 'Focus Time' : 'Break Time';
+    }
+    
     updateDisplay();
+    setProgress(100);
 }
 
 function toggleMode() {
