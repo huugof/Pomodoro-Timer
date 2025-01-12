@@ -388,3 +388,76 @@ body {
         margin: 0;
     }
 }
+
+/* Alert Dialog Styles */
+.alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.alert-box {
+    background: var(--white);
+    padding: 32px;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 360px;
+    width: 90%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transform: scale(0.95);
+    transition: transform 0.2s ease-in-out;
+}
+
+.alert-message {
+    margin: 0 0 24px 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+.alert-button {
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 16px 32px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.125rem;
+    font-weight: 600;
+    transition: transform 0.1s ease-in-out, background 0.2s ease-in-out;
+}
+
+.alert-button:hover {
+    transform: scale(1.02);
+    background: var(--primary-hover);
+}
+
+/* Break mode alert styles */
+.break-mode .alert-box {
+    background: var(--white);
+}
+
+.break-mode .alert-message {
+    color: var(--text-primary);
+}
+
+.break-mode .alert-button {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.break-mode .alert-button:hover {
+    background: var(--primary-hover);
+}

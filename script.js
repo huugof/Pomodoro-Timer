@@ -7,8 +7,8 @@ const toggleModeButton = document.getElementById('toggle-mode');
 const progressRing = document.querySelector('.progress-ring-circle');
 const addTimeButton = document.getElementById('add-time');
 
-const WORK_TIME = 25 * 60;
-const BREAK_TIME = 5 * 60;
+const WORK_TIME = 0.25 * 60;
+const BREAK_TIME = 0.15 * 60;
 const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * 140;
 
 let timeLeft = WORK_TIME;
@@ -38,6 +38,63 @@ function updateDisplay() {
     setProgress(progress);
 }
 
+function showCustomAlert(message, onConfirm) {
+    const alertOverlay = document.createElement("div");
+    alertOverlay.className = "alert-overlay";
+
+    const alertBox = document.createElement("div");
+    alertBox.className = "alert-box";
+
+    const messageText = document.createElement("p");
+    messageText.className = "alert-message";
+    messageText.textContent = isWorkTime ? "Time for a Break!" : "Time to Work!";
+
+    const actionButton = document.createElement("button");
+    actionButton.className = "alert-button";
+    actionButton.textContent = "Start";
+
+    alertBox.appendChild(messageText);
+    alertBox.appendChild(actionButton);
+    alertOverlay.appendChild(alertBox);
+    document.body.appendChild(alertOverlay);
+
+    // Animate in
+    requestAnimationFrame(() => {
+        alertOverlay.style.opacity = "1";
+        alertBox.style.transform = "scale(1)";
+    });
+
+    // Handle closing
+    const closeAlert = () => {
+        alertOverlay.style.opacity = "0";
+        alertBox.style.transform = "scale(0.95)";
+        setTimeout(() => {
+            document.body.removeChild(alertOverlay);
+            if (onConfirm) {
+                onConfirm();
+                // Start the timer automatically after switching modes
+                if (!timerId) {
+                    toggleTimer();
+                }
+            }
+        }, 200);
+    };
+
+    // Event listeners
+    actionButton.addEventListener("click", closeAlert);
+    alertOverlay.addEventListener("click", (e) => {
+        if (e.target === alertOverlay) closeAlert();
+    });
+
+    // Handle Escape key
+    document.addEventListener("keydown", function escapeHandler(e) {
+        if (e.key === "Escape") {
+            closeAlert();
+            document.removeEventListener("keydown", escapeHandler);
+        }
+    });
+}
+
 function toggleTimer() {
     const startIcon = `<svg viewBox="0 0 24 24" width="24" height="24">
         <path d="M8 5v14l11-7z"/>
@@ -61,15 +118,21 @@ function toggleTimer() {
                 timerId = null;
                 startButton.innerHTML = startIcon;
                 
-                isWorkTime = !isWorkTime;
-                timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
-                modeText.textContent = isWorkTime ? 'Focus Time' : 'Break Time';
-                document.body.classList.toggle('break-mode');
-                updateDisplay();
+                const message = `${isWorkTime ? "Focus" : "Break"} time is over!`;
+                showCustomAlert(message, () => {
+                    isWorkTime = !isWorkTime;
+                    timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
+                    currentTotalTime = timeLeft;
+                    if (modeText) {
+                        modeText.textContent = isWorkTime ? "Focus Time" : "Break Time";
+                    }
+                    document.body.classList.toggle("break-mode");
+                    updateDisplay();
+                });
                 
-                if (Notification.permission === 'granted') {
-                    new Notification('Timer Complete', {
-                        body: isWorkTime ? 'Time to focus!' : 'Time for a break!'
+                if (Notification.permission === "granted") {
+                    new Notification("Timer Complete", {
+                        body: message
                     });
                 }
             }
