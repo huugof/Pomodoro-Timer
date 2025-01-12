@@ -142,10 +142,6 @@ body {
     color: var(--white);
 }
 
-#reset {
-    color: var(--danger-color);
-}
-
 /* Mode Switch Button */
 .mode-switch {
     position: absolute;
@@ -210,11 +206,6 @@ body {
         background: var(--primary-hover);
     }
 
-    #reset:hover {
-        background: var(--danger-color);
-        color: var(--white);
-    }
-
     .break-mode .circle-button:hover {
         background-color: var(--break-surface-hover);
         /* Standardized hover shadow for break mode */
@@ -239,6 +230,17 @@ body {
 
     /* Ensure break mode maintains white hover */
     .break-mode #add-time:hover {
+        background-color: var(--break-surface-hover);
+    }
+
+    /* Add hover state for reset button in work mode */
+    body:not(.break-mode) #reset:hover {
+        background: var(--primary-color);
+        color: var(--white);
+    }
+
+    /* Ensure break mode maintains white hover */
+    .break-mode #reset:hover {
         background-color: var(--break-surface-hover);
     }
 }
@@ -309,7 +311,7 @@ body {
     /* Reset button touch states */
     #reset:active,
     #reset.touch-active {
-        background-color: var(--danger-color);
+        background-color: var(--primary-hover);
         color: var(--white);
     }
 
