@@ -448,3 +448,56 @@ body.break-mode #add-time:hover {
     background-color: var(--danger-hover); /* Red on hover */
     color: var(--white);
 }
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    .container {
+        min-height: 100vh;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 2rem;
+    }
+
+    .timer-container {
+        margin: 0 auto;
+        position: relative;
+        transform: translateY(-10vh);
+    }
+
+    .controls {
+        position: fixed;
+        bottom: 10vh;
+        left: 0;
+        right: 0;
+        width: 100%;
+        padding: 0 2rem;
+        margin: 0;
+        background: transparent;
+    }
+}
+
+/* Move all hover effects inside this media query */
+@media (hover: hover) {
+    .circle-button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15), 
+                    0px 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .circle-button.primary:hover {
+        background: var(--primary-hover);
+    }
+
+    #reset:hover {
+        background-color: var(--danger-hover);
+        color: var(--white);
+    }
+
+    .break-mode .circle-button:hover {
+        background-color: var(--break-surface-hover);
+        color: var(--break-background);
+    }
+}
