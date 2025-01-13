@@ -3,7 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="fc:frame" content='{"version":"0.0.1","imageUrl":"https://raw.githubusercontent.com/huugof/Pomodoro-Timer/88d17599228c782769c6571ef467279446796caf/start.png","button":{"title":"OK Banger Timer","action":{"type":"launch_frame","name":"Start Timer","url":"https://huugof.github.io/Pomodoro-Timer/","splashImageUrl":"https://raw.githubusercontent.com/huugof/Pomodoro-Timer/399deb410c3ef664f74cdb66898c86b0c654cabd/splashimage.png","splashBackgroundColor":"#f7f7f7"}}}'>
+    <meta
+        name="fc:frame"
+        content='{
+            "version": "next",
+            "imageUrl": "https://raw.githubusercontent.com/huugof/Pomodoro-Timer/88d17599228c782769c6571ef467279446796caf/start.png",
+            "button": {
+                "title": "OK Banger Timer",
+                "action": {
+                    "type": "launch_frame",
+                    "name": "Start Timer",
+                    "url": "https://huugof.github.io/Pomodoro-Timer/",
+                    "splashImageUrl": "https://raw.githubusercontent.com/huugof/Pomodoro-Timer/399deb410c3ef664f74cdb66898c86b0c654cabd/splashimage.png",
+                    "splashBackgroundColor": "#f7f7f7"
+                }
+            }
+        }'
+    />
     <title>OK Banger Timer</title>
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -11,10 +27,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk/dist/index.min.js"></script>
-    <script>
-        frame.sdk.actions.ready();
-    </script>
     <div class="container">
         <div class="timer-container">
             <button id="toggle-mode" class="circle-button mode-switch">
@@ -58,5 +70,32 @@
         </div>
     </div>
     <script src="script.js"></script>
+    <script type="module">
+        // Hide Farcaster frame splash screen
+        function sendFrameReadyMessage() {
+
+        const generateMessageId = () => {
+        return Array(4)
+            .fill(0)
+            .map(() => Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString(16))
+            .join('-');
+        }
+
+        const message = {
+        id: generateMessageId(),
+        type: "APPLY",
+        path: ["ready"],
+        argumentList: [{}]
+        };
+
+        if (window.ReactNativeWebView) {
+        window.ReactNativeWebView.postMessage(JSON.stringify(message));
+        } else {
+        window.parent.postMessage(message, "*");
+        }
+        }
+
+        sendFrameReadyMessage();
+    </script>
 </body>
 </html> 
