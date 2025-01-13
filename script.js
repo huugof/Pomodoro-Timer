@@ -7,8 +7,8 @@ const toggleModeButton = document.getElementById('toggle-mode');
 const progressRing = document.querySelector('.progress-ring-circle');
 const addTimeButton = document.getElementById('add-time');
 
-const WORK_TIME = 0.25 * 60;
-const BREAK_TIME = 0.15 * 60;
+const WORK_TIME = 25 * 60;
+const BREAK_TIME = 5 * 60;
 const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * 140;
 
 let timeLeft = WORK_TIME;
