@@ -3,6 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        property="fc:frame"
+        content='{
+            "version": "next",
+            "imageUrl": "",
+            "button": {
+                "title": "Pomodoro Timer",
+                "action": {
+                    "type": "launch_frame",
+                    "name": "Start Timer"",
+                    "url": "https://huugof.github.io/Pomodoro-Timer/",
+                    "splashImageUrl": "https://github.com/huugof/Pomodoro-Timer/blob/main/splashimage.png",
+                    "splashBackgroundColor": "#f7f7f7"
+                }
+            }
+        }'
+    />
     <title>Focus Timer</title>
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -10,6 +27,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk/dist/index.min.js"></script>
+    <script>
+        frame.sdk.actions.ready();
+    </script>
     <div class="container">
         <div class="timer-container">
             <button id="toggle-mode" class="circle-button mode-switch">

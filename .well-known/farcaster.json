@@ -1,0 +1,15 @@
+{
+    "accountAssociation": {
+      "header": "",
+      "payload": "",
+      "signature": ""
+    },
+    "frame": {
+      "name": "Pomodoro Timer",
+      "version": "0.0.1",
+      "iconUrl": "https://github.com/huugof/Pomodoro-Timer/blob/main/favicon-16x16.png",
+      "homeUrl": "https://huugof.github.io/Pomodoro-Timer/",
+      "splashImageUrl": "https://github.com/huugof/Pomodoro-Timer/blob/main/splashimage.png",
+      "splashBackgroundColor": "#f7f7f7"
+    }
+  }
